@@ -43,7 +43,7 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public void addPerson(Person person) {
-        String sqlQuery = "insert into postgres.project_1.person(full_name, year_of_birthday)  values (?,?)";
+        String sqlQuery = "insert into postgres.project_1.person (full_name, year_of_birthday)  values (?,?)";
         jdbcTemplate.update(sqlQuery, person.getFullName(), person.getYearOfBirthday());
 
     }

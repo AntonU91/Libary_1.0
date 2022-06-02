@@ -27,27 +27,13 @@ public class PersonController {
         //personService.addPerson(person);
         return "person/registered-form";
     }
-    @PostMapping()
+
+    @PostMapping("/creat-new-person")
     public String createNewPerson (@ModelAttribute ("newPerson") Person person) {
         personService.addPerson(person);
         return "redirect:/people";
     }
-//    @GetMapping()
-//    public String createNewPerson (@RequestParam("fullName") String fullName, @RequestParam ("yearOfBirthday") String birthYear, Model model) {
-//        Person person = new Person();
-//        person.setFullName(fullName);
-//        person.setYearOfBirthday(Integer.parseInt(birthYear));
-//        personService.addPerson(person);
-//        Person person1 = new Person();
-//        person1.setFullName("Ivanov Valik");
-//        person1.setYearOfBirthday(1978);
-//        personService.addPerson(person1);
-//        Person person2 = personService.getPersonById(3);
-//        System.out.println(person2);
-//
-//
-//        return "redirect:/people";
-//    }
+
 
 
 

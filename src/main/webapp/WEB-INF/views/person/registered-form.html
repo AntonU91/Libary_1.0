@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/people}"  th:object = "${newPerson}" >
+<form th:method="post" th:action="@{/creat-new-person}" th:object="${newPerson}">
     <label for="name">Enter your name and surname</label> <input type="text" th:field="*{fullName}" id="name">
     <label for="birthday_year">Enter your birth year</label> <input type="text" th:field="*{yearOfBirthday}" id="birthday_year">
     <input type="submit" value="Create">
