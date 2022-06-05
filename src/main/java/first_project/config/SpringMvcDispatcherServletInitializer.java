@@ -33,6 +33,7 @@ public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationCon
         registerHiddenFieldFilter(aServletContext);
     }
 
+    // метод реализует возможность обрабатывать скрытый input (<input type='hidden' name='_method' value = (patch, delete и прочие) />
     private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");

@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form th:method="post" th:action="@{/creat-new-person}" th:object="${newPerson}">
+<form th:method="patch" th:action="@{/update-person/{id}(id= ${person.getId()})}" th:object="${person}">
     <label for="name">Enter your name and surname</label> <input type="text" th:field="*{fullName}" id="name">
-    <div style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Name error</div>
+    <br>
     <label for="birthday_year">Enter your birth year</label> <input type="text" th:field="*{yearOfBirthday}" id="birthday_year">
-    <div style="color: red" th:if="${#fields.hasErrors('yearOfBirthday')}" th:errors="*{yearOfBirthday}">Name error</div>
-    <input type="submit" value="Create">
+    <br>
+    <input type="submit" value="Edit info">
 </form>
 
 </body>

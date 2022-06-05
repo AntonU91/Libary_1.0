@@ -1,13 +1,29 @@
 package first_project.models;
 
+
 import org.springframework.stereotype.Component;
+
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 @Component
 public class Person {
+
+//   LocalDate currentDate = LocalDate.now();
+// int maximumBirthYearAllowed = currentDate.getYear() - 14;
     private int id;
 
-
+    @NotEmpty(message = "Person full name must not be empty")
+    @Size(min = 3, message = " Your full name should have more than 2 letters")
     private String fullName;
+
+    //@NotEmpty(message = " This field must not be empty")
+    @Min(value = 1920, message = "Year of birth should not be less than 1920")
     private int yearOfBirthday;
 
     public Person() {

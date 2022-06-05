@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -23,7 +24,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> getAllPeople() {
-       return personDao.getAllPeople();
+        return personDao.getAllPeople();
     }
 
     @Override
@@ -32,7 +33,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void updatePerson(int id,  Person updatedPerson) {
+    public void updatePerson(int id, Person updatedPerson) {
         personDao.updatePerson(id, updatedPerson);
 
     }
@@ -41,5 +42,10 @@ public class PersonServiceImpl implements PersonService {
     public void deletePerson(int id) {
         personDao.deletePerson(id);
 
+    }
+
+    @Override
+    public Optional<Person> getPersonByFullName(String fullName) {
+        return personDao.getPersonByFullName(fullName);
     }
 }

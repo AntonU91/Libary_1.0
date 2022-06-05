@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PersonDaoImpl implements PersonDao {
@@ -50,8 +50,8 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public void updatePerson(int id, Person updatedPerson) {
-        String sqlQuery = "update postgres.project_1.person set full_name=?, set year_of_birthday=? where id=?";
-        jdbcTemplate.update(sqlQuery, updatedPerson.getFullName(), updatedPerson.getYearOfBirthday());
+        String sqlQuery = "update postgres.project_1.person set full_name=?, year_of_birthday=? where id=?";
+        jdbcTemplate.update(sqlQuery, updatedPerson.getFullName(), updatedPerson.getYearOfBirthday(), id);
 
     }
 
@@ -60,6 +60,13 @@ public class PersonDaoImpl implements PersonDao {
         String sqlQuery = " delete from postgres.project_1.person where id=?";
         jdbcTemplate.update(sqlQuery, id);
     }
+
+    @Override
+    public Optional<Person> getPersonByFullName (String fullName) {
+        String sqlQuery = "select * from postgres.project_1.person where full_name=?";
+         return Optional.ofNullable( jdbcTemplate.query(sqlQuery, new Object[] {fullName}, personRowMapper).stream().findAny().orElse(null));
+    }
+
 
 
 }

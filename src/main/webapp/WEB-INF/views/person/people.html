@@ -6,11 +6,11 @@
 </head>
 <body>
 <div th:each="person : ${people}">
-<a th:href="@{/people}"> <span th:text="${person.getFullName}"/>, <span th:text="${person.getYearOfBirthday}"/></a>
+<a th:href="@{/people/{id}(id=${person.getId})}"> <span th:text="${person.getFullName}"/>, <span th:text="${person.getYearOfBirthday}"/></a>
     <br>
 </div>
 <br>
 <br>
-<a th:href="@{people/new}"><button>Register new member</button></a>
+<a th:href="@{/people/new}"><button>Register new member</button></a>
 </body>
 </html>
