@@ -1,20 +1,28 @@
 package first_project.controllers;
 
+import first_project.dao.PersonDao;
+import first_project.models.Book;
 import first_project.models.Person;
 import first_project.service.PersonService;
 import first_project.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PersonController {
     private final PersonService personService;
     private final PersonValidator personValidator;
+
+    @Autowired
+    private PersonDao personDao;
 
     @Autowired
     public PersonController(PersonService personService, PersonValidator personValidator) {
@@ -47,25 +55,29 @@ public class PersonController {
 
     @GetMapping("/people/{id}")
     public String showPersonInfo(@PathVariable String id, Model model) {
-
+        List<Book> bookList;
+        bookList = personDao.getBooks(Integer.parseInt(id));
         model.addAttribute("person", personService.getPersonById(Integer.parseInt(id)));
+        model.addAttribute("bookList", bookList);
+        System.out.println(bookList);
         return "person/person-info";
 
     }
 
     @GetMapping("/people/{id}/edit")
-    public String updatePersonInfo(@PathVariable String id, Model model) {
-        Person person = personService.getPersonById(Integer.parseInt(id));
+    public String updatePersonInfo(@PathVariable int id, Model model) {
+        Person person = personService.getPersonById(id);
         model.addAttribute("person", person);
+
         return "person/update-person";
     }
 
-    @PatchMapping("/update-person/{id}")
+    @PatchMapping("/people/{id}")
     public String executeUpdatingPersonInfo(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable String id) {
-        personService.updatePerson(Integer.parseInt(id), person);
-        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) return "person/update-person";
-        return "redirect:/people/{id}";
+        personService.updatePerson(Integer.parseInt(id), person);
+        return "redirect:/people";
+
     }
 
     @DeleteMapping("/delete-person/{id}")

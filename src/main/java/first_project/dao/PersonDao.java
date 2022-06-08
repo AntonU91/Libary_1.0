@@ -1,5 +1,6 @@
 package first_project.dao;
 
+import first_project.models.Book;
 import first_project.models.Person;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public interface PersonDao {
     public void updatePerson (int id, Person updatedPerson);
     public void deletePerson (int id);
     public Optional<Person> getPersonByFullName (String fullName);
+    public List<Book> getBooks (int id);
 
 
 }

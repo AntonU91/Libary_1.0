@@ -12,4 +12,5 @@ public interface PersonService {
     public void updatePerson (int id, Person updatedPerson);
     public void deletePerson (int id);
     public Optional<Person> getPersonByFullName (String fullName);
+
 }

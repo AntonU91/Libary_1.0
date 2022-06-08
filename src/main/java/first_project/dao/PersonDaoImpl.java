@@ -1,5 +1,6 @@
 package first_project.dao;
 
+import first_project.models.Book;
 import first_project.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,6 +21,12 @@ public class PersonDaoImpl implements PersonDao {
                     resultSet.getString("full_name"),
                     resultSet.getInt("year_of_birthday"));
 
+    RowMapper<Book> bookRowMapper = (ResultSet resultSet, int rowNum) -> new Book(resultSet.getInt("id"),
+            resultSet.getString("title"),
+            resultSet.getString("author"),
+            resultSet.getInt("year_of_publication"),
+            resultSet.getInt("person_id"));
+
     private final JdbcTemplate jdbcTemplate;
 
 
@@ -31,7 +38,7 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public Person getPersonById(int id) {
         String sqlQuery = "select * from postgres.project_1.person where id=?";
-        return jdbcTemplate.queryForObject(sqlQuery, new Object[]{id}, personRowMapper);
+        return jdbcTemplate.query(sqlQuery, new Object[]{id}, personRowMapper).stream().findAny().orElse(null);
     }
 
     @Override
@@ -67,6 +74,11 @@ public class PersonDaoImpl implements PersonDao {
          return Optional.ofNullable( jdbcTemplate.query(sqlQuery, new Object[] {fullName}, personRowMapper).stream().findAny().orElse(null));
     }
 
+    @Override
+    public List<Book> getBooks(int id) {
+        String sql = "select * from postgres.project_1.book where person_id =?";
+        return jdbcTemplate.query(sql, new Object[] {id}, bookRowMapper);
+    }
 
 
 }
