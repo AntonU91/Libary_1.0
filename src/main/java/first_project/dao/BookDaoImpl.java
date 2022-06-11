@@ -5,12 +5,13 @@ import first_project.models.Person;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.util.List;
 
-@Repository
+@Component
 public class BookDaoImpl implements BookDao {
 
     RowMapper<Book> bookRowMapper = (ResultSet resultSet, int rowNum) -> new Book(resultSet.getInt("id"),
