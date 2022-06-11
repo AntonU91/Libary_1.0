@@ -1,6 +1,7 @@
 package first_project.service;
 
 import first_project.dao.PersonDao;
+import first_project.models.Book;
 import first_project.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Optional<Person> getPersonByFullName(String fullName) {
         return personDao.getPersonByFullName(fullName);
+    }
+
+    @Override
+    public List<Book> getBooks(int id) {
+       return personDao.getBooks(id);
     }
 
 

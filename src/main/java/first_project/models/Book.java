@@ -25,7 +25,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, int yearOfPublication , int personId) {
+    public Book( int id,String title, String author, int yearOfPublication , int personId) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -33,7 +33,9 @@ public class Book {
         this.personId = personId;
     }
 
-
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

@@ -2,6 +2,7 @@ package first_project.dao;
 
 import first_project.models.Book;
 import first_project.models.Person;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

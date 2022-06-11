@@ -21,7 +21,7 @@ public class PersonDaoImpl implements PersonDao {
                     resultSet.getString("full_name"),
                     resultSet.getInt("year_of_birthday"));
 
-    RowMapper<Book> bookRowMapper = (ResultSet resultSet, int rowNum) -> new Book(
+    RowMapper<Book> bookRowMapper = (ResultSet resultSet, int rowNum) -> new Book(resultSet.getInt("id"),
             resultSet.getString("title"),
             resultSet.getString("author"),
             resultSet.getInt("year_of_publication"),

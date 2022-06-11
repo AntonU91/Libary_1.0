@@ -21,8 +21,7 @@ public class PersonController {
     private final PersonService personService;
     private final PersonValidator personValidator;
 
-    @Autowired
-    private PersonDao personDao;
+
 
     @Autowired
     public PersonController(PersonService personService, PersonValidator personValidator) {
@@ -56,7 +55,7 @@ public class PersonController {
     @GetMapping("/people/{id}")
     public String showPersonInfo(@PathVariable String id, Model model) {
         List<Book> bookList;
-        bookList = personDao.getBooks(Integer.parseInt(id));
+        bookList = personService.getBooks(Integer.parseInt(id));
         model.addAttribute("person", personService.getPersonById(Integer.parseInt(id)));
         model.addAttribute("bookList", bookList);
         System.out.println(bookList);

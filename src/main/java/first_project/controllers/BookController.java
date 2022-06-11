@@ -18,8 +18,7 @@ import java.util.Optional;
 public class BookController {
     private final BookService bookService;
 
-    @Autowired
-    private BookDao bookDao;
+   
 
     @Autowired
     private PersonDao personDao;
@@ -55,7 +54,7 @@ public class BookController {
         Book book = bookService.getBookById(id);
         model.addAttribute("book", book);
         //
-        Optional<Person> bookOwner = Optional.ofNullable(bookDao.getOwner(id));
+        Optional<Person> bookOwner = Optional.ofNullable(bookService.getOwner(id));
         if (bookOwner.isPresent()) {
             model.addAttribute("owner", bookOwner.get());
         } else {
@@ -74,6 +73,7 @@ public class BookController {
     @PatchMapping("/books/{id}")
     public String executeUpdatingPersonInfo(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors()) {
+           // book.setId(id); //todo
             return "book/update-book";}
         bookService.updateBook(id, book);
         return "redirect:/books";
@@ -87,14 +87,14 @@ public class BookController {
 
     @PatchMapping("/set-book-free/{id}")
     public String makeBookFree(@PathVariable int id) {
-        Person person = bookDao.getOwner(id);
-       bookDao.releaseBookFromTheOwner(person.getId());
+        Person person = bookService.getOwner(id);
+       bookService.releaseBookFromTheOwner(person.getId());
        return "redirect:/books/"+id;
     }
     @PatchMapping ("/set-book-owner/{id}")
     public String setBookOwner(@PathVariable String id, @ModelAttribute("person") Person selectedPerson) {
         System.out.println(selectedPerson.getId());
-        bookDao.setOwnerForBook(Integer.parseInt(id), selectedPerson);
+        bookService.setOwnerForBook(Integer.parseInt(id), selectedPerson);
         return "redirect:/books/"+id;
 
     }

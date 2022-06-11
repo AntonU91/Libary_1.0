@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -44,8 +45,21 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void setPerson(int bookId, Person person) {
-        bookDao.setOwnerForBook(bookId, person);
+    public Person getOwner(int bookId) {
+        return bookDao.getOwner(bookId);
     }
+
+    @Override
+    public void releaseBookFromTheOwner(int id) {
+        bookDao.releaseBookFromTheOwner(id);
+
+    }
+
+    @Override
+    public void setOwnerForBook(int bookId, Person person) {
+        bookDao.setOwnerForBook(bookId, person);
+
+    }
+
 
 }

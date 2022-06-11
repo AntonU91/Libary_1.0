@@ -12,6 +12,8 @@ public interface BookService {
     public void addBook (Book book);
     public void updateBook (int id, Book updatedBook);
     public void deleteBook (int id);
-    //public Optional<Book> getPersonByFullName (String fullName);
-    public void setPerson ( int bookId, Person person);
+    public Person getOwner(int bookId);
+    public void releaseBookFromTheOwner(int id);
+    public void setOwnerForBook(int bookId, Person person);
+
 }
