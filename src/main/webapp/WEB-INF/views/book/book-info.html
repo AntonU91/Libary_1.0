@@ -35,7 +35,7 @@
 
 
 
-<a th:href="@{{id}/edit(id = ${book.getId()})}">
+<a th:href="@{/books/{id}/edit(id = ${book.getId()})}">
     <button>Edit info</button>
 </a>
 <br>

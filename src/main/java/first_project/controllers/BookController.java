@@ -53,6 +53,7 @@ public class BookController {
     @GetMapping("/books/{id}")
     public String showBookInfo(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
         Book book = bookService.getBookById(id);
+        model.addAttribute("book", book);
         //
         Optional<Person> bookOwner = Optional.ofNullable(bookDao.getOwner(id));
         if (bookOwner.isPresent()) {
@@ -60,7 +61,6 @@ public class BookController {
         } else {
             model.addAttribute("people", personDao.getAllPeople());
         }
-        model.addAttribute("book", book);
         return "book/book-info";
     }
 
@@ -71,9 +71,10 @@ public class BookController {
         return "book/update-book";
     }
 
-    @PatchMapping("/update-book/{id}")
+    @PatchMapping("/books/{id}")
     public String executeUpdatingPersonInfo(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult, @PathVariable("id") int id) {
-        if (bindingResult.hasErrors()) return "book/update-book";
+        if (bindingResult.hasErrors()) {
+            return "book/update-book";}
         bookService.updateBook(id, book);
         return "redirect:/books";
     }
