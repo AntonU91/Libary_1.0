@@ -8,7 +8,6 @@ import javax.validation.constraints.*;
 public class Book {
     private  int id;
 
-    // создать валидатор уникальности названия книги
 
     @NotBlank (message = "The title must have at least one non-space character")
     private String title;
