@@ -17,7 +17,7 @@
     <br>
 
     <div th:if="${owner}">
-        <p th:text="'Книга сейчас у: ' +${owner.getFullName()} "></p>
+        <p th:text="'This book is ordered by ' +${owner.getFullName()} "></p>
         <form th:method="PATCH" th:action="@{/set-book-free/{id}(id=${book.getId()})}">
             <input class="btn btn-primary" role="button" type="submit" value="Release book">
         </form>

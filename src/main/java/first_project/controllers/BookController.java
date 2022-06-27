@@ -96,7 +96,6 @@ public class BookController {
         System.out.println(selectedPerson.getId());
         bookService.setOwnerForBook(Integer.parseInt(id), selectedPerson);
         return "redirect:/books/"+id;
-
     }
 
 
