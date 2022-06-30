@@ -5,4 +5,4 @@ This project implements an electronic library account and consists of two main c
 
 The project uses the following technologies: Spring MVC, JDBC Template, Thymeleaf, Spring Validator, PostgreSQL, Bootstrap.
 
-A logical continuation of this project is Library 2.0 (href="https://github.com/AntonU91/Libary_2.0), where Spring Data JPA technology is used instead of JDBC Template, and a number of useful features are added (sorting, pagination, book search by title, book rent overdue indicator).
+A logical continuation of this project is Library 2.0 (https://github.com/AntonU91/Libary_2.0), where Spring Data JPA technology is used instead of JDBC Template, and a number of useful features are added (sorting, pagination, book search by title, book rent overdue indicator).
